@@ -6,15 +6,11 @@ app = Flask(__name__)
 
 
 def RecognizeVoice(audio_file, language):
-    if not os.path.exists("/var/www/flask/data/model_" + language):
-        print(
-            "Please download the model from https://alphacephei.com/vosk/models and unpack as 'model' in the current folder.")
-        exit(1)
     wf = wave.open(audio_file, "rb")
     if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
         print("Audio file must be WAV format mono PCM.")
         exit(1)
-    model = Model("/var/www/flask/data/model_" + language)
+    model = Model("/home/rostam/Downloads/model_de")
     rec = KaldiRecognizer(model, wf.getframerate())
     all_res = ""
     while True:
@@ -41,7 +37,7 @@ def hello():
 def record():
     language = request.headers.get('lang')
     tag = request.headers.get('tag')
-    file_name = '/var/www/flask/data/' + str(datetime.datetime.now()).replace(' ', '-') + language + tag + ".wav"
+    file_name = 'data/' + str(datetime.datetime.now()).replace(' ', '-') + language + tag + ".wav"
     with open(file_name, 'wb') as f:
         f.write(request.data)
     res = RecognizeVoice(file_name, language)

@@ -6,8 +6,9 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext;
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
-$('#loader').hide();
+
 function startRecording() {
+    console.log("salam");
     var constraints = { audio: true, video:false }
 	recordButton.disabled = true;
 	stopButton.disabled = false;
