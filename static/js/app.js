@@ -51,19 +51,24 @@ function createDownloadLink(blob) {
 	$('#loader').show();
 	var xhr=new XMLHttpRequest();
 	xhr.onload=function(e) {
+	console.log("salam1");
 		if(this.readyState === 4) {
+		console.log("salam2");
 		     li.appendChild(document.createElement("BR"));
 		     tmp = document.createElement("H3");
 		     tmp.appendChild(document.createTextNode(e.target.responseText));
 		     li.appendChild(tmp);
 		     li.appendChild(document.createElement("BR"));
+		     console.log("salam4");
 		     $('#loader').hide()
-
+            console.log("salam3");
              utter = new SpeechSynthesisUtterance();
              utter.lang = 'de-DE';
              utter.volume = 0.5;
              utter.onend = function() { alert('Speech has finished');}
-		     utter.text = e.target.responseText;
+             tmp = e.target.responseText
+		     utter.text = tmp.substr(tmp.search('->') + 2);
+		     console.log(utter.text);
 		     window.speechSynthesis.speak(utter);
 	     }
         };
