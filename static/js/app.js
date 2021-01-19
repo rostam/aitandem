@@ -58,6 +58,13 @@ function createDownloadLink(blob) {
 		     li.appendChild(tmp);
 		     li.appendChild(document.createElement("BR"));
 		     $('#loader').hide()
+
+             utter = new SpeechSynthesisUtterance();
+             utter.lang = 'de-DE';
+             utter.volume = 0.5;
+             utter.onend = function() { alert('Speech has finished');}
+		     utter.text = e.target.responseText;
+		     window.speechSynthesis.speak(utter);
 	     }
         };
 	xhr.open("POST","record",true);

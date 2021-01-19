@@ -2,10 +2,15 @@ from vosk import Model, KaldiRecognizer
 from flask import Flask, request, send_from_directory, render_template
 import os, wave, json, base64, datetime, csv
 from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
+from gtts import gTTS
 app = Flask(__name__)
 
 bot = ChatBot('MyChatBot')
+trainer = ListTrainer(bot)
+trainer.train(['Hallo','Wie geht es dir?','mir geht es gut, und du?','es geht mir auch gut, danke'])
 
+language = 'de'
 
 def RecognizeVoice(audio_file, language):
     wf = wave.open(audio_file, "rb")
@@ -43,7 +48,8 @@ def record():
     with open(file_name, 'wb') as f:
         f.write(request.data)
     res = RecognizeVoice(file_name, language)
-
+    chatbot_response = bot.get_response(res)
+    res = res + "->" + chatbot_response.text
     return res
 
 
