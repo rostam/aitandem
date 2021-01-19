@@ -1,8 +1,10 @@
 from vosk import Model, KaldiRecognizer
 from flask import Flask, request, send_from_directory, render_template
 import os, wave, json, base64, datetime, csv
-
+from chatterbot import ChatBot
 app = Flask(__name__)
+
+bot = ChatBot('MyChatBot')
 
 
 def RecognizeVoice(audio_file, language):
@@ -41,36 +43,7 @@ def record():
     with open(file_name, 'wb') as f:
         f.write(request.data)
     res = RecognizeVoice(file_name, language)
-    return res
 
-@app.route("/question", methods=['POST'])
-def question():
-    import fasttext as ft
-
-    model_title = ft.load_model('data/title.bin')
-    model_subtitle = ft.load_model('data/subtitle.bin')
-
-    lang = request.form['lang']
-    text = request.form['text']
-    title_predict = model_title.predict(text, k=3)
-    subtitle_predict = model_subtitle.predict(text, k=3)
-
-    res = ""
-    res2 = ""
-    res3 = ""
-    res4 = ""
-    for i in range(0, 3):
-        res += map_label_title[title_predict[0][i].split(',')[0]] + ","
-        res2 += str(title_predict[1][i])[0:14] + ","
-        res3 += map_label_subtitle[subtitle_predict[0][i].split(',')[0]] + ","
-        res4 += str(subtitle_predict[1][i])[0:14] + ","
-
-    res = res[0:-1]
-    res2 = res2[0:-1]
-    res3 = res3[0:-1]
-    res4 = res4[0:-1]
-
-    res = res + "---" + res2 + ":" + res3 + "---" + res4
     return res
 
 
