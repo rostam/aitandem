@@ -65,7 +65,7 @@ function createDownloadLink(blob) {
              tmp = document.createElement("H3");
 		     tmp.appendChild(document.createTextNode('Bot: '+ tmptext.substr(tmptext.search('->') + 2)));
 		     li.appendChild(tmp);
-		     li.appendChild(document.createElement("BR"));
+//		     li.appendChild(document.createElement("BR"));
 
 		     $('#loader').hide()
              utter = new SpeechSynthesisUtterance();
