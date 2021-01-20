@@ -44,30 +44,35 @@ function createDownloadLink(blob) {
 	au.src = url;
 	link.href = url;
 	//link.download = filename+".wav";
-	link.innerHTML = "Save to disk";
-	li.appendChild(au);
-	li.appendChild(document.createTextNode(filename+".wav "))
-	li.appendChild(link);
-	$('#loader').show();
+//	link.innerHTML = "Save to disk";
+//	li.appendChild(au);
+//	li.appendChild(document.createTextNode(filename+".wav "))
+//	li.appendChild(link);
+//	$('#loader').show();
 	var xhr=new XMLHttpRequest();
 	xhr.onload=function(e) {
-	console.log("salam1");
 		if(this.readyState === 4) {
-		console.log("salam2");
 		     li.appendChild(document.createElement("BR"));
+
+		     text = e.target.responseText;
+		     tmptext = e.target.responseText;
+
 		     tmp = document.createElement("H3");
-		     tmp.appendChild(document.createTextNode(e.target.responseText));
+		     tmp.appendChild(document.createTextNode('You: ' + tmptext.substr(0, tmptext.search('->'))));
+		     li.appendChild(tmp);
+//		     li.appendChild(document.createElement("BR"));
+
+             tmp = document.createElement("H3");
+		     tmp.appendChild(document.createTextNode('Bot: '+ tmptext.substr(tmptext.search('->') + 2)));
 		     li.appendChild(tmp);
 		     li.appendChild(document.createElement("BR"));
-		     console.log("salam4");
+
 		     $('#loader').hide()
-            console.log("salam3");
              utter = new SpeechSynthesisUtterance();
              utter.lang = 'de-DE';
              utter.volume = 0.5;
-             utter.onend = function() { alert('Speech has finished');}
-             tmp = e.target.responseText
-		     utter.text = tmp.substr(tmp.search('->') + 2);
+//             utter.onend = function() { alert('Speech has finished');}
+		     utter.text = tmptext.substr(tmptext.search('->') + 2);
 		     console.log(utter.text);
 		     window.speechSynthesis.speak(utter);
 	     }

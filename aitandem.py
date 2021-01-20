@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 bot = ChatBot('MyChatBot')
 trainer = ListTrainer(bot)
-trainer.train(['Hallo','Wie geht es dir?','mir geht es gut, und du?','es geht mir auch gut, danke'])
+trainer.train(['Hallo','Hallo', 'Wie geht es dir?','mir geht es gut, und du?','es geht mir auch gut, danke'])
+trainer.train(['Hallo','Hallo', 'alles gut bei dir?','mir geht es gut, danke, und du?','es geht mir auch gut, danke'])
 
 language = 'de'
 
