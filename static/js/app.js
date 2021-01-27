@@ -10,8 +10,8 @@ var stopButton = document.getElementById("stopButton");
 function startRecording() {
     console.log("salam");
     var constraints = { audio: true, video:false }
-	recordButton.disabled = true;
-	stopButton.disabled = false;
+//	recordButton.disabled = true;
+//	stopButton.disabled = false;
 	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
 		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 		audioContext = new AudioContext();
@@ -27,8 +27,8 @@ function startRecording() {
 }
 
 function stopRecording() {
-    stopButton.disabled = true;
-    recordButton.disabled = false;
+//    stopButton.disabled = true;
+//    recordButton.disabled = false;
     rec.stop();
     gumStream.getAudioTracks()[0].stop();
     rec.exportWAV(createDownloadLink);
@@ -52,8 +52,7 @@ function createDownloadLink(blob) {
 	var xhr=new XMLHttpRequest();
 	xhr.onload=function(e) {
 		if(this.readyState === 4) {
-		     li.appendChild(document.createElement("BR"));
-
+//		     li.appendChild(document.createElement("BR"));
 		     text = e.target.responseText;
 		     tmptext = e.target.responseText;
 

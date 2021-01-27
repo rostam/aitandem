@@ -5,7 +5,7 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from gtts import gTTS
 app = Flask(__name__)
-
+model = Model("/home/rostam/Downloads/model_de")
 bot = ChatBot('MyChatBot')
 trainer = ListTrainer(bot)
 trainer.train(['Hallo','Hallo', 'Wie geht es dir?','mir geht es gut, und du?','es geht mir auch gut, danke'])
@@ -18,7 +18,7 @@ def RecognizeVoice(audio_file, language):
     if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
         print("Audio file must be WAV format mono PCM.")
         exit(1)
-    model = Model("/home/rostam/Downloads/model_de")
+
     rec = KaldiRecognizer(model, wf.getframerate())
     all_res = ""
     while True:

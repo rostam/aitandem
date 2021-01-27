@@ -11,13 +11,14 @@
   <body>
     <h2>AITandem</h2>
     <div id="controls">
-  	 <button class='button' id="recordButton" onclick="startRecording()">Record</button>
-  	 <button class='button' id="stopButton" onclick="stopRecording()" disabled>Stop and Recognize</button>
-	 <div id="loader" class="loader"></div>
+        <p onmousedown="startRecording()" onmouseup="stopRecording()">Record!</p>
+<!--  	 <button class='button' id="recordButton"  onmousedown="startRecording()" onmouseup="stopRecording()">Record</button>-->
+<!--  	 <button class='button' id="stopButton" onclick="stopRecording()" disabled>Stop and Recognize</button>-->
+	 <div id="loader" class="loader" hidden></div>
     </div>
-    <br/>
+<!--    <br/>-->
     <div id="formats" hidden>Format: start recording to see sample rate</div>
-  	<p><strong>Recordings:</strong></p>
+<!--  	<p><strong>Recordings:</strong></p>-->
   	<ol id="recordingsList"></ol>
   	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
   	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
